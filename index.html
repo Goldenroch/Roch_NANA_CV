@@ -3,180 +3,506 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Golden Roch - Portfolio Motion Design</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <title>Portfolio - ROCH NANA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle at top, #000428, #004e92);
-      color: #fff;
+      background: linear-gradient(135deg, #1a202c, #2d3748, #ed8936, #f6e05e);
+      background-size: 400%;
+      animation: gradient 12s ease infinite;
+      color: #f7fafc;
+      font-family: 'Roboto', sans-serif;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
-    header {
-      text-align: center;
-      padding: 6rem 2rem;
-      background: linear-gradient(145deg, #ff003c, #ff8c00);
-      color: white;
-      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-      animation: gradientShift 10s infinite linear;
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    @keyframes gradientShift {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+
+    .section {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease-out;
     }
-    header h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      letter-spacing: 3px;
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    header p {
-      font-size: 1.3rem;
-      color: #fffcd2;
-    }
-    nav {
-      position: sticky;
-      top: 0;
-      background: #001f3f;
-      padding: 1rem;
-      text-align: center;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    nav a {
-      color: #ffcc00;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: 700;
-      transition: 0.3s ease;
-    }
-    nav a:hover {
-      color: #ff003c;
-    }
-    section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
-      font-size: 2.5rem;
-      text-align: center;
-      color: #00ffd5;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 5px #00ffd5;
-    }
-    .content-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-    .card {
-      background: #031d44;
-      border: 2px solid #00ffd5;
+
+    .skill-card {
+      background: linear-gradient(135deg, #1a202c, #4a5568);
+      backdrop-filter: blur(8px);
+      border: 1px solid #ed8936;
+      box-shadow: 0 0 12px rgba(237, 137, 54, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: pointer;
     }
-    .card:hover {
+
+    .skill-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px #00ffd5;
+      box-shadow: 0 0 20px rgba(237, 137, 54, 0.6);
     }
-    .card img {
-      width: 70px;
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 0 10px #00ffd5);
+
+    .project-card {
+      background: linear-gradient(135deg, #1a202c, #4a5568);
+      backdrop-filter: blur(8px);
+      border: 1px solid #f6e05e;
+      box-shadow: 0 0 12px rgba(246, 224, 94, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
     }
-    .card h3 {
-      color: #ffcc00;
-      margin-bottom: 0.5rem;
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(246, 224, 94, 0.6);
     }
-    .card p {
-      color: #c2c2c2;
-    }
-    footer {
-      background: #001f3f;
-      color: #999;
+
+    .about-card {
+      background: linear-gradient(135deg, #1a202c, #4a5568);
+      backdrop-filter: blur(10px);
+      border: 2px solid #ed8936;
+      box-shadow: 0 0 15px rgba(237, 137, 54, 0.5);
+      border-radius: 16px;
       padding: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
+      animation: fadeIn 1.5s ease-out;
     }
-    a {
-      color: #00ffd5;
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #ed8936;
+      box-shadow: 0 0 15px rgba(237, 137, 54, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(237, 137, 54, 0.7);
+    }
+
+    #circuit-canvas {
+      width: 100%;
+      height: 400px;
+      background: #1a202c;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #ed8936;
+      box-shadow: 0 0 20px rgba(237, 137, 54, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100vh;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      background: linear-gradient(45deg, #ed8936, #f6e05e);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .header-banner {
+      background: linear-gradient(90deg, #1a202c, #ed8936, #f6e05e);
+      background-size: 400%;
+      animation: bannerGradient 8s ease infinite;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 2px solid #ed8936;
+      box-shadow: 0 0 15px rgba(237, 137, 54, 0.5);
+      animation: zoomInOut 5s ease infinite;
+    }
+
+    .header-banner h1 {
+      font-size: 5rem;
+      font-weight: 700;
+      color: #f7fafc;
+      text-shadow: 0 0 10px rgba(237, 137, 54, 0.7);
+      animation: slideIn 1.5s ease-out;
+    }
+
+    .header-banner p {
+      font-size: 2.2rem;
+      color: #f6e05e;
+      text-shadow: 0 0 8px rgba(246, 224, 94, 0.7);
+      animation: slideIn 2s ease-out;
+    }
+
+    @keyframes bannerGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes zoomInOut {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>Roch NANA</h1>
-    <p>Ingénieur Réseaux & Télécom</p>
+<body class="min-h-screen">
+  <!-- Particules interactives -->
+  <canvas id="particles"></canvas>
+
+  <!-- Bandeau animé avec nom et métier -->
+  <header class="header-banner">
+    <h1>ROCH NANA</h1>
+    <p>SysAdmin | DevOps</p>
   </header>
 
-  <nav>
-    <a href="#about">À propos</a>
-    <a href="#skills">Compétences</a>
-    <a href="#projects">Projets</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <!-- Animation de circuit électronique -->
+  <canvas id="circuit-canvas"></canvas>
 
-  <section id="about">
-    <h2>À propos</h2>
-    <p style="text-align:center; max-width:700px; margin:auto">Passionné par l’univers du numérique, je développe des solutions sécurisées et performantes à l’aide d’outils modernes comme Docker, Kubernetes et GitLab CI/CD.</p>
-  </section>
-
-  <section id="skills">
-    <h2>Compétences</h2>
-    <div class="content-grid">
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/226/226772.png" alt="Linux">
-        <h3>Linux / Unix</h3>
-      </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" alt="Docker">
-        <h3>Docker / Kubernetes</h3>
-      </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="CI/CD">
-        <h3>CI/CD GitLab</h3>
-      </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/929/929426.png" alt="Monitoring">
-        <h3>Monitoring & Sécurité</h3>
+  <!-- Section À propos -->
+  <section id="about" class="section max-w-4xl mx-auto p-6 text-center">
+    <div class="about-card">
+      <h2 class="text-4xl font-bold mb-6 text-[#f6e05e]">À propos</h2>
+      <img src="1.png" alt="Photo de profil" class="profile-pic mx-auto mb-6">
+      <div class="text-lg leading-relaxed">
+        <p>Passionné par le numérique, je déploie  des solutions sécurisées et performantes avec des outils comme Docker, Ansible et GitLab CI/CD, en visant des systèmes robustes et une haute disponibilité. Mon approche s’appuie sur l’automatisation via des pipelines CI/CD et l’infrastructure as code (Ansible), avec un fort accent sur la cybersécurité et le monitoring (Prometheus, Grafana). Grâce à une veille technologique constante, j’intègre les meilleures pratiques pour une transformation digitale durable et efficace.</p>
       </div>
     </div>
   </section>
 
-  <section id="projects">
-    <h2>Projets</h2>
-    <div class="content-grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Monitoring">
-        <h3>Monitoring Docker</h3>
-        <p>Stack Prometheus, Grafana, cAdvisor et alerting pour le suivi de conteneurs.</p>
+  <!-- Section Compétences -->
+  <section id="skills" class="section max-w-5xl mx-auto p-6">
+    <h2 class="text-3xl font-bold mb-6 text-center text-[#f6e05e]">Compétences</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <h3 class="text-xl font-semibold">Conteneurisation et orchestration</h3>
+        </div>
+        <p>Maîtrise de Docker et Docker Compose, Docker Swarm pour la création d’environnements isolés et reproductibles.</p>
       </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1610484826884-cd3f1d0bd89f?auto=format&fit=crop&w=800&q=80" alt="QR Code">
-        <h3>Pointage QR Code</h3>
-        <p>Application Laravel pour le pointage horaire via QR code mobile.</p>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          <h3 class="text-xl font-semibold">Supervision et monitoring</h3>
+        </div>
+        <p>Mise en place de solutions de suivi de performance et d’alerting avec Prometheus, Grafana, CAdvisor, NodeExporer, Promtail et Loki.</p>
+      </div>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+          <h3 class="text-xl font-semibold">Infrastructure as Code</h3>
+        </div>
+        <p>Utilisation d’Ansible pour le provisionnement, le déploiement automatisé et la gestion cohérente des configurations.</p>
+      </div>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          <h3 class="text-xl font-semibold">CI/CD</h3>
+        </div>
+        <p>Conception de pipelines robustes avec GitLab CI/CD, intégrant des tests automatisés, des déploiements continus et des processus de versioning.</p>
+      </div>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 1.104-.896 2-2 2s-2-.896-2-2 2-4 2-4 2 2.896 2 4zm0 0c0 1.104-.896 2-2 2s-2-.896-2-2 2-4 2-4 2 2.896 2 4z"></path></svg>
+          <h3 class="text-xl font-semibold">Sécurité opérationnelle</h3>
+        </div>
+        <p>Sensibilité élevée aux enjeux de sécurité, avec intégration des bonnes pratiques SecOps, analyse des flux et durcissement des environnements.</p>
+      </div>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
+          <h3 class="text-xl font-semibold">Systèmes & réseaux</h3>
+        </div>
+        <p>Solide compréhension des architectures réseau, du routage IP, du NAT, du DNS et des protocoles liés à la téléphonie IP (SIP, RTP).</p>
+      </div>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+          <h3 class="text-xl font-semibold">Déploiement applicatif</h3>
+        </div>
+        <p>Intégration continue et mise en production d'applications Laravel sur des serveurs Linux (Ubuntu).</p>
+      </div>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m0-2v-2m0-2V7m6 10v-2m0-2v-2m0-2V7"></path></svg>
+          <h3 class="text-xl font-semibold">Monitoring centralisé</h3>
+        </div>
+        <p>Configuration de Loki, Promtail, stack ELK (ElasticSearch, Logstash, Kibana) pour la centralisation et l’analyse des logs applicatifs et système.</p>
+      </div>
+      <div class="skill-card p-6 rounded-lg cursor-pointer" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="flex items-center mb-4">
+          <svg class="w-8 h-8 mr-2 text-[#ed8936]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m3-4a4 4 0 100-8 4 4 0 000 8zm6 0a4 4 0 100-8 4 4 0 000 8z" /></svg>
+          <h3 class="text-xl font-semibold">Travail collaboratif</h3>
+        </div>
+        <p>Collaboration avec différentes équipes de la conception à la livraison. Élaboration de séances de formation du personnel sur les nouveaux produits + suivis et acommpagement.</p>
       </div>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p style="text-align:center">📧 nanaroch78@gmail.com</p>
-    <p style="text-align:center">🌐 <a href="https://github.com/tonpseudo" target="_blank">@tonpseudo</a></p>
+  <!-- Section Projets -->
+  <section id="projects" class="section max-w-5xl mx-auto p-6">
+    <h2 class="text-3xl font-bold mb-6 text-center text-[#f6e05e]">Projets</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="project-card p-6 rounded-lg">
+        <img src="2.png" alt="Nextcloud Platform" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold text-[#f6e05e]">Share Point (2025)</h3>
+        <p>Mise en place d'une plateforme de partage, stockage des documents et de collaboration sécurisée avec Nextcloud.</p>
+      </div>
+      <div class="project-card p-6 rounded-lg">
+        <img src="4.jpg" alt="Telegram Bot" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold text-[#f6e05e]">Bot Telegram (2025)</h3>
+        <p>Création d'un bot Telegram automatisé pour faciliter le téléchargement de médias (Instagram, Twitter, Tiktok).</p>
+      </div>
+      <div class="project-card p-6 rounded-lg">
+        <img src="3.jpg" alt="OpenStack Cloud" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold text-[#f6e05e]">Cloud privé (2024)</h3>
+        <p>Mise en place et déploiement d'un cloud privée basée sur OpenStack pour la gestion d'une infrastrucure.</p>
+      </div>
+      <div class="project-card p-6 rounded-lg">
+        <img src="5.jpg" alt="Autonomous Car" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold text-[#f6e05e]">Voiture autonome (2024)</h3>
+        <p>Conception et simulation d'un système pour une voiture autonome avec FreeRTOS et une carte Arduino.</p>
+      </div>
+      <div class="project-card p-6 rounded-lg">
+        <img src="6.png" alt="Clustering HA" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold text-[#f6e05e]">Clustering et HA (2021)</h3>
+        <p>Mise en place de solutions de clustering pour assurer la haute disponibilité et la redondance des services.</p>
+      </div>
+      <div class="project-card p-6 rounded-lg">
+        <img src="7.jpg" alt="E-learning" class="w-full h-40 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-semibold text-[#f6e05e]">E-learning (2020)</h3>
+        <p>Conception et réalisation d'une plateforme de E-learning pour palier au problème d'éduction en période Covid 19.</p>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Golden Roch. Tous droits réservés.</p>
-  </footer>
+  <!-- Section Contact -->
+  <section id="contact" class="section max-w-4xl mx-auto p-6 text-center">
+    <h2 class="text-3xl font-bold mb-6 text-[#f6e05e]">Contact</h2>
+    <p class="text-lg">ROCH NANA</p>
+    <p class="text-lg">Email: nanaroch78@gmail.com</p>
+    <p class="text-lg">Téléphone: +237 681 51 72 93</p>
+    <a href="https://wa.me/+237655883830" class="inline-block mt-4 px-6 py-3 bg-[#ed8936] text-white rounded-lg hover:bg-[#f6e05e] hover:text-[#1a202c] transition">Contactez via whatsapp</a>
+  </section>
+
+  <!-- Script pour animations et particules -->
+  <script>
+    // Animation des sections au scroll
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Particules interactives
+    const particleCanvas = document.getElementById('particles');
+    const particleCtx = particleCanvas.getContext('2d');
+    particleCanvas.width = 300;
+    particleCanvas.height = window.innerHeight;
+
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * particleCanvas.width,
+        y: Math.random() * particleCanvas.height,
+        radius: Math.random() * 5 + 2,
+        vx: Math.random() * 2 - 1,
+        vy: Math.random() * 2 - 1,
+        color: ['#ed8936', '#f6e05e', '#1a202c'][Math.floor(Math.random() * 3)]
+      });
+    }
+
+    let particleMouse = { x: null, y: null };
+    particleCanvas.addEventListener('mousemove', (e) => {
+      const rect = particleCanvas.getBoundingClientRect();
+      particleMouse.x = e.clientX - rect.left;
+      particleMouse.y = e.clientY - rect.top;
+    });
+
+    function animateParticles() {
+      particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+      particles.forEach(p => {
+        particleCtx.beginPath();
+        particleCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        particleCtx.fillStyle = p.color;
+        particleCtx.fill();
+
+        if (particleMouse.x !== null && particleMouse.y !== null) {
+          const dx = particleMouse.x - p.x;
+          const dy = particleMouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            p.vx += dx / 1000;
+            p.vy += dy / 1000;
+          }
+        }
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > particleCanvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > particleCanvas.height) p.vy *= -1;
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Animation de circuit électronique futuriste
+    const circuitCanvas = document.getElementById('circuit-canvas');
+    const circuitCtx = circuitCanvas.getContext('2d');
+    circuitCanvas.width = window.innerWidth;
+    circuitCanvas.height = 400;
+
+    // Grille de fond
+    function drawGrid() {
+      circuitCtx.strokeStyle = 'rgba(246, 224, 94, 0.1)';
+      circuitCtx.lineWidth = 1;
+      for (let x = 0; x < circuitCanvas.width; x += 50) {
+        circuitCtx.beginPath();
+        circuitCtx.moveTo(x, 0);
+        circuitCtx.lineTo(x, circuitCanvas.height);
+        circuitCtx.stroke();
+      }
+      for (let y = 0; y < circuitCanvas.height; y += 50) {
+        circuitCtx.beginPath();
+        circuitCtx.moveTo(0, y);
+        circuitCtx.lineTo(circuitCanvas.width, y);
+        circuitCtx.stroke();
+      }
+    }
+
+    const nodes = [];
+    for (let i = 0; i < 30; i++) {
+      nodes.push({
+        x: Math.random() * circuitCanvas.width,
+        y: Math.random() * circuitCanvas.height,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        pulse: Math.random() * Math.PI * 2
+      });
+    }
+
+    const flowParticles = [];
+    for (let i = 0; i < 50; i++) {
+      flowParticles.push({
+        x: Math.random() * circuitCanvas.width,
+        y: Math.random() * circuitCanvas.height,
+        vx: (Math.random() - 0.5) * 3,
+        vy: (Math.random() - 0.5) * 3,
+        life: Math.random(),
+        maxLife: 0.5 + Math.random() * 0.5
+      });
+    }
+
+    let circuitMouse = { x: null, y: null };
+    circuitCanvas.addEventListener('mousemove', (e) => {
+      const rect = circuitCanvas.getBoundingClientRect();
+      circuitMouse.x = e.clientX - rect.left;
+      circuitMouse.y = e.clientY - rect.top;
+    });
+
+    function animateCircuit() {
+      circuitCtx.clearRect(0, 0, circuitCanvas.width, circuitCanvas.height);
+      drawGrid();
+
+      // Dessiner les nœuds
+      nodes.forEach((node, i) => {
+        if (circuitMouse.x !== null && circuitMouse.y !== null) {
+          const dx = circuitMouse.x - node.x;
+          const dy = circuitMouse.y - node.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 200) {
+            node.vx += dx / 1500;
+            node.vy += dy / 1500;
+          }
+        }
+
+        node.x += node.vx;
+        node.y += node.vy;
+        node.pulse += 0.1;
+
+        if (node.x < 0 || node.x > circuitCanvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > circuitCanvas.height) node.vy *= -1;
+
+        circuitCtx.beginPath();
+        circuitCtx.arc(node.x, node.y, 6, 0, Math.PI * 2);
+        circuitCtx.fillStyle = '#f6e05e';
+        circuitCtx.shadowBlur = 10;
+        circuitCtx.shadowColor = 'rgba(246, 224, 94, 0.8)';
+        circuitCtx.fill();
+        circuitCtx.shadowBlur = 0;
+
+        // Lignes de connexion
+        for (let j = i + 1; j < nodes.length; j++) {
+          const node2 = nodes[j];
+          const dist = Math.sqrt((node.x - node2.x) ** 2 + (node.y - node2.y) ** 2);
+          if (dist < 150) {
+            const gradient = circuitCtx.createLinearGradient(node.x, node.y, node2.x, node2.y);
+            gradient.addColorStop(0, '#1a202c');
+            gradient.addColorStop(1, '#ed8936');
+            circuitCtx.beginPath();
+            circuitCtx.moveTo(node.x, node.y);
+            circuitCtx.lineTo(node2.x, node2.y);
+            circuitCtx.strokeStyle = gradient;
+            circuitCtx.lineWidth = 2 + Math.sin(node.pulse) * 1;
+            circuitCtx.stroke();
+          }
+        }
+      });
+
+      // Particules de flux
+      flowParticles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life += 0.02;
+
+        if (p.life > p.maxLife) {
+          p.x = Math.random() * circuitCanvas.width;
+          p.y = Math.random() * circuitCanvas.height;
+          p.life = 0;
+        }
+
+        circuitCtx.beginPath();
+        circuitCtx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        circuitCtx.fillStyle = `rgba(237, 137, 54, ${1 - p.life / p.maxLife})`;
+        circuitCtx.fill();
+      });
+
+      requestAnimationFrame(animateCircuit);
+    }
+    animateCircuit();
+  </script>
 </body>
 </html>
